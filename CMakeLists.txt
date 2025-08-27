@@ -46,11 +46,12 @@ set(CMAKE_CXX_COMPILER_WORKS 1)
 # Configuration options #
 #########################
 
-project(CH32fun-template C ASM)
+project(stylophone-midi C ASM)
 set(TARGET "main" CACHE STRING "Target name without extension")
 set(TARGET_EXT "c" CACHE STRING "File extension of target source file")
 set(TARGET_EXTRAS
-#        my_file.c
+        rv003usb/rv003usb/rv003usb.c
+        rv003usb/rv003usb/rv003usb.S
         CACHE STRING "Extra C files in src")
 set(TARGET_MCU "CH32V003" CACHE STRING "MCU model")
 set(MINICHLINK_PATH "${CMAKE_SOURCE_DIR}/ch32fun/minichlink" CACHE PATH "Path to minichlink")
@@ -125,6 +126,8 @@ add_custom_command(
 
 # Include directories
 set(INCLUDE_DIRS
+        ${CMAKE_SOURCE_DIR}/rv003usb/rv003usb
+        ${CMAKE_SOURCE_DIR}/rv003usb/lib
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/include
         ${CH32FUN_PATH}
@@ -150,7 +153,7 @@ set(SOURCES
 
 # Add extra sources
 foreach(extra ${TARGET_EXTRAS})
-    list(APPEND SOURCES ${CMAKE_SOURCE_DIR}/src/${extra})
+    list(APPEND SOURCES ${CMAKE_SOURCE_DIR}/${extra})
 endforeach()
 
 # Create executable
