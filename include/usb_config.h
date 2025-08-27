@@ -77,7 +77,7 @@ static const uint8_t config_descriptor[] = {
 	TUSB_DESC_INTERFACE,
 	1,                        // Index of this interface.
 	0,                        // Index of this alternate setting.
-	2,                        // bNumEndpoints = 2
+	1,                        // bNumEndpoints = 2
 	1,                        // AUDIO
 	3,                        // MIDISTREAMING
 	0,                        // Unused bInterfaceProtocol
@@ -90,21 +90,7 @@ static const uint8_t config_descriptor[] = {
 	0x0, 0x01,                // Revision of this class specification
 	0x41, 0,                  // Total size of class-specific descriptors
 
-	// B.3.3 MIDI IN Jack Descriptor
-	6,                        // bLength
-    TUSB_DESC_CS_INTERFACE,   // CS_INTERFACE descriptor
-	0x02,                     // bDescriptorSubtype = MIDI_IN_JACK
-	0x01,                     // bJackType = EMBEDDED
-	0x01,                     // bJackID
-	0x00,                     // iJack (unused)
-
-	// B.3.4 MIDI IN Jack Descriptor
-	6,                        // bLength
-    TUSB_DESC_CS_INTERFACE,   // CS_INTERFACE descriptor
-	0x02,                     // bDescriptorSubtype = MIDI_IN_JACK
-	0x02,                     // bJackType = EXTERNAL
-	0x02,                     // bJackID
-	0x00,                     // iJack (unused)
+	// 12 less bytes
 
 	// B.3.5 MIDI OUT Jack Descriptor
 	9,                        // bLength
@@ -117,38 +103,16 @@ static const uint8_t config_descriptor[] = {
 	0x01,                     // BaSourcePin
 	0x00,                     // iJack (unused)
 
-	// B.3.4 MIDI OUT Jack Descriptor
-	9,                        // bLength
-    TUSB_DESC_CS_INTERFACE,   // CS_INTERFACE descriptor
-	0x03,                     // bDescriptorSubtype = MIDI_OUT_JACK
-	0x02,                     // bJackType = EXTERNAL
-	0x04,                     // bJackID
-	0x01,                     // bNrPins = 1
-	0x01,                     // BaSourceID
-	0x01,                     // BaSourcePin
-	0x00,                     // iJack (unused)
+	// 9 less bytes
 
 
 	// B.4 Bulk OUT Endpoint Descriptors
 	// Actually, we are just interrupt.  So yolo.
 
-	//B.4.1 Standard Bulk OUT Endpoint Descriptor
-	9,                  // bLength
-	TUSB_DESC_ENDPOINT,
-	0x1,                // bEndpointAddress
-	3,                  // bmAttributes = Interrupt
-	8, 0,               // wMaxPacketSize 
-	1,                  // bIntervall
-	0,                  // bRefresh
-	0,                  // bSynchAddress
+	// 9 less bytes
 
 
-	// B.4.2 Class-specific MS Bulk OUT Endpoint Descriptor
-	5,                  // bLength
-	TUSB_DESC_CS_ENDPOINT,
-	1,                  // bDescriptorSubtype = MS_GENERAL
-	1,                  // bNumEmbMIDIJack = Number of embedded MIDI IN Jacks
-	1,                  // BaAssocJackID = 1
+	// 5 less bytes
 
 	// B.5 Example 1 Bulk IN Endpoint Descriptors
 	// B.5.1 Standard Bulk IN Endpoint Descriptor
