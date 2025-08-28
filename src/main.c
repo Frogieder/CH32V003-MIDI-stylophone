@@ -132,17 +132,19 @@ void midi_receive(uint8_t * msg)
 	*/
 }
 
-void switch_tones(uint8_t old, uint8_t new)
+void switch_tones(const uint8_t old, const uint8_t new)
 {
 
 	if (old != MAGIC_NUMBER)
 	{
 		uint8_t midi_msg[4] = {0x08, 0x90, old, 0};
+		while (!midi_send_ready()) {};
 		midi_send(midi_msg, 4);
 	}
 	if (new != MAGIC_NUMBER)
 	{
 		uint8_t midi_msg[4] = {0x09, 0x90, new, 0x7F};
+		while (!midi_send_ready()) {};
 		midi_send(midi_msg, 4);
 	}
 }
